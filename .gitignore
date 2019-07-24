@@ -1,0 +1,15 @@
+*.pyc
+*.egg-info
+*.egg
+*~
+*.xtc
+*.nc
+*.pdb
+*.prmtop
+*build
+*dist
+*test/*.out
+*test/*.mt.gz*
+*test/infiles/*.out
+*test/infiles/*.mt.gz*
+*test/outfiles*
