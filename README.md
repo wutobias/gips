@@ -39,7 +39,7 @@ Contact
 
 Main Author of the Program
 --------------------------
-* Tobias Hüfner (née Wulsdorf), Philipps-Universität Marburg, tobias.wulsdorf@gmail.com 
+* Tobias Hüfner (née Wulsdorf), Philipps-Universität Marburg, tobias.wulsdorf@uni-marburg.de
 
 Scientific Supervision
 ----------------------
