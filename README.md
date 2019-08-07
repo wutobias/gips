@@ -6,7 +6,7 @@ Requirements
 * Linux Operating System
 * GNU C compiler
 * python 2.7 (Anaconda2 recommended)
-* python packages: numpy, scipy, pygmo, matplotlib
+* python packages: numpy, scipy, pygmo, matplotlib, rdkit
 * python packages used for installation only: pip, setuptools
 
 Installation
