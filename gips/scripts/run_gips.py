@@ -60,7 +60,7 @@ def main():
                                 kforce=args.kforce, gradient=args.gradient, boundary=args.boundary, radiusadd=args.radiusadd, 
                                 boundsfile=args.boundsfile, softness=args.softness, softcut=args.softcut, pairfile=args.pairfile, 
                                 exclude=args.exclude, paircut=args.paircut, shuffle=args.shuffle, ksplit=args.ksplit, 
-                                ksplitfile=args.ksplitfile, prefix=args.prefix)
+                                ksplitfile=args.ksplitfile, prefix=args.prefix, scaling=args.scaling, parmsfile=args.parmsfile)
 
 
     ### ~~~~~~~~~~~~~~ ###
@@ -103,7 +103,7 @@ def main():
 
         run_mapout.mapout(gdatarec_dict, gdata_dict, mode=args.fitmode, parms=args.score, pairs=args.pairs, 
                             parmsfile=args.parmsfile, radiusadd=args.radiusadd, softness=args.softness, softcut=args.softcut, 
-                            exclude=args.exclude, prefix=args.prefix, verbose=args.verbose)
+                            exclude=args.exclude, prefix=args.prefix, scaling=args.scaling, verbose=args.verbose)
 
 
     ### ~~~~~~~~~~~~~~~~~~ ###
@@ -137,7 +137,7 @@ def main():
         run_decomposition.decomposition(gdatarec_dict, gdata_dict, mode=args.fitmode, parms=args.score, pairs=args.pairs,
                                         parmsfile=args.parmsfile, frag_file=args.frag_file, map_file=args.map_file, radiusadd=args.radiusadd, 
                                         softness=args.softness, softcut=args.softcut, pairfile=args.pairfile, exclude=args.exclude, 
-                                        paircut=args.paircut, prefix=args.prefix, verbose=args.verbose)
+                                        paircut=args.paircut, prefix=args.prefix, scaling=args.scaling, verbose=args.verbose)
 
 
 def entry_point():

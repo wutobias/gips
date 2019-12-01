@@ -28,6 +28,7 @@ class mode4(MC_fitter):
                     boundsdict=None,
                     pairlist=None,
                     exclude=None,
+                    scaling=2.0,
                     select=None,
                     decomp_E=False,
                     decomp_S=False,
@@ -41,6 +42,7 @@ class mode4(MC_fitter):
                                     softness=softness,
                                     softcut=softcut,
                                     exclude=exclude,
+                                    scaling=scaling,
                                     decomp_E=decomp_E,
                                     decomp_S=decomp_S,
                                     verbose=verbose)

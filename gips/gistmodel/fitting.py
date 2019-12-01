@@ -23,6 +23,7 @@ class MC_fitter(gdat_fit_lib):
                     softness=1.,
                     softcut=2.,
                     exclude=None,
+                    scaling=2.0,
                     decomp_E=False,
                     decomp_S=False,
                     verbose=False):
@@ -61,6 +62,7 @@ class MC_fitter(gdat_fit_lib):
                                         softness=softness,
                                         softcut=softcut,
                                         exclude=exclude,
+                                        scaling=scaling,
                                         verbose=verbose)
 
         self.prepare_gdat()

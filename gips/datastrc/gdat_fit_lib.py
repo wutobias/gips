@@ -16,6 +16,7 @@ class gdat_fit_lib(object):
                         softness=1.,
                         softcut=2.,
                         exclude=None,
+                        scaling=2.,
                         verbose=False):
 
         self.gdatarec_dict = gdatarec_dict
@@ -25,11 +26,13 @@ class gdat_fit_lib(object):
         self.radiusadd     = radiusadd
         self.softness      = softness
         self.softcut       = softcut
+        self.scaling       = scaling
         self.verbose       = verbose
         if type(exclude) == type(None):
             self.exclude = list()
         else:
             self.exclude = exclude
+
 
     def load_metadata(self):
 
@@ -153,7 +156,7 @@ class gdat_fit_lib(object):
                     bins = self.gdat[-1].bins
                 
                     self.E[i_ref,:bins[0],:bins[1],:bins[2]] = self.gdat[-1].Esw_norm + \
-                                                            2.*(self.gdat[-1].Eww_norm_unref - self.ref_energy)
+                                                            self.scaling*(self.gdat[-1].Eww_norm_unref - self.ref_energy)
                     self.S[i_ref,:bins[0],:bins[1],:bins[2]] = - self.gdat[-1].dTStrans_norm - \
                                                                 self.gdat[-1].dTSorient_norm
                     self.g[i_ref,:bins[0],:bins[1],:bins[2]] = self.gdat[-1].gO
@@ -253,7 +256,7 @@ class gdat_fit_lib(object):
                     bins     = self.gdat[-1].bins
                 
                     self.E[i_ref,:bins[0],:bins[1],:bins[2]] = self.gdat[-1].Esw_norm + \
-                                                            2.*(self.gdat[-1].Eww_norm_unref - self.ref_energy)
+                                                            self.scaling*(self.gdat[-1].Eww_norm_unref - self.ref_energy)
                     self.S[i_ref,:bins[0],:bins[1],:bins[2]] = - self.gdat[-1].dTStrans_norm - \
                                                                 self.gdat[-1].dTSorient_norm
                     self.g[i_ref,:bins[0],:bins[1],:bins[2]] = self.gdat[-1].gO
@@ -346,7 +349,7 @@ class gdat_fit_lib(object):
                     bins     = self.gdat_cplx[-1].bins
                 
                     self.E_cplx[i_cplx,:bins[0],:bins[1],:bins[2]] = self.gdat_cplx[-1].Esw_norm + \
-                                                                    2.*(self.gdat_cplx[-1].Eww_norm_unref - self.ref_energy)
+                                                                    self.scaling*(self.gdat_cplx[-1].Eww_norm_unref - self.ref_energy)
                     self.S_cplx[i_cplx,:bins[0],:bins[1],:bins[2]] = - self.gdat_cplx[-1].dTStrans_norm - \
                                                                     self.gdat_cplx[-1].dTSorient_norm
                     self.g_cplx[i_cplx,:bins[0],:bins[1],:bins[2]] = self.gdat_cplx[-1].gO
@@ -415,7 +418,7 @@ class gdat_fit_lib(object):
                     bins     = self.gdat_lig[-1].bins
 
                     self.E_lig[i_lig,:bins[0],:bins[1],:bins[2]] = self.gdat_lig[-1].Esw_norm + \
-                                                                2.*(self.gdat_lig[-1].Eww_norm_unref - self.ref_energy)
+                                                                self.scaling*(self.gdat_lig[-1].Eww_norm_unref - self.ref_energy)
                     self.S_lig[i_lig,:bins[0],:bins[1],:bins[2]] = - self.gdat_lig[-1].dTStrans_norm - \
                                                                 self.gdat_lig[-1].dTSorient_norm
                     self.g_lig[i_lig,:bins[0],:bins[1],:bins[2]] = self.gdat_lig[-1].gO
