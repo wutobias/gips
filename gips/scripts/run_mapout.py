@@ -18,7 +18,7 @@ from gips.utils.read_write import write_maps
 
 def mapout(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False, 
             parmsfile=None, radiusadd=[0.,3.], softness=1., softcut=2., 
-            exclude=None, prefix=None, verbose=False):
+            exclude=None, prefix=None, scaling=2.0, verbose=False):
 
     if verbose:
         print "Start mapout procedure with"
@@ -50,6 +50,7 @@ def mapout(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False,
                     radiusadd=radiusadd,
                     softness=softness,
                     softcut=softcut,
+                    scaling=scaling,
                     verbose=verbose)
 
     ### Find position of SES in parms file

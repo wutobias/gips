@@ -27,7 +27,7 @@ def get_frag_list(mol):
 class frag_library(object):
 
     def __init__(self):
-        
+
         self.frag_list   = list()
         self.mol_list    = list()
         self.N_frag      = 0
@@ -134,4 +134,3 @@ class frag_library(object):
                     self.frag2mol_mapping[-1].append(list(matches[0]))
                 else:
                     self.frag2mol_mapping[-1].append(list())
-                

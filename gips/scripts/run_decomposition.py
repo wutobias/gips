@@ -33,7 +33,8 @@ from gips import DOUBLE
 
 def decomposition(gdatarec_lib, gdata_lib, mode, parms=6, pairs=True, parmsfile=None, 
                 frag_file=None, map_file=None, radiusadd=[0.,3.], softness=1., softcut=2., 
-                pairfile=None, exclude=None, paircut=0.0, prefix=None, verbose=False):
+                pairfile=None, exclude=None, paircut=0.0, prefix=None, scaling=2.0, 
+                verbose=False):
 
     if verbose:
         print "Start mapout procedure with"
@@ -70,6 +71,7 @@ def decomposition(gdatarec_lib, gdata_lib, mode, parms=6, pairs=True, parmsfile=
                     radiusadd=radiusadd,
                     softness=softness,
                     softcut=softcut,
+                    scaling=scaling,
                     verbose=verbose)
 
     parmdict = read_parmsfile(parmsfile)

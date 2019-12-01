@@ -12,6 +12,7 @@ from gips.gistmodel.mode7 import mode7
 from gips.gistmodel.generate_output import print_fun
 from gips.utils.read_write import read_boundsfile
 from gips.utils.read_write import read_pairsfile
+from gips.utils.read_write import read_parmsfile
 from gips.utils.misc import mode_error
 from gips.utils.misc import generate_ksplits
 from gips.datastrc.gdat_fit_lib import gdat_fit_lib
@@ -22,7 +23,8 @@ def gistmodel(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False, decomp_E=Fals
             decomp_S=False, optimizer='evolution', niter=500, nmin=1000, popsize=50, 
             stepsize=0.05, verbose=False, kforce=100., gradient=False, boundary=False, 
             radiusadd=[0.,3.], boundsfile=None, softness=1., softcut=2., pairfile=None, 
-            exclude=None, paircut=0.0, shuffle=False, ksplit=5, ksplitfile=None, prefix=None):
+            exclude=None, paircut=0.0, shuffle=False, ksplit=5, ksplitfile=None, prefix=None,
+            scaling=2.0, parmsfile=None):
 
     if verbose:
         print "Start optimization with"
@@ -132,6 +134,7 @@ def gistmodel(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False, decomp_E=Fals
                             softness=softness,
                             softcut=softcut,
                             exclude=None,
+                            scaling=scaling,
                             verbose=verbose)
 
         fit_lib.load_metadata()
@@ -246,6 +249,9 @@ def gistmodel(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False, decomp_E=Fals
                 i           = fitter.name.index("%s-%s" %(name[0], name[1]))
                 k_groups[i] = k_groups[k]
 
+    if parmsfile!=None:
+        parmdict = read_parmsfile(parmsfile)
+
     for i in ksplitlist:
         test_group  = np.where(k_groups==i)[0]
         train_group = np.where(k_groups!=i)[0]
@@ -257,21 +263,35 @@ def gistmodel(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False, decomp_E=Fals
         fitter.set_step()
         fitter.set_x0()
 
-        _print_fun = print_fun(fitter=fitter, mode=mode, optimizer=optimizer, 
-                                optparms=optparms, selection_A=train_group, selection_B=test_group, 
-                                prefix="k%d."%i + prefix, verbose=verbose)
-    
-        if verbose:
-            print "Start optimization for ksplit=%d ..." %i
+        if parmsfile!=None:
+            _print_fun = print_fun(fitter=fitter, mode=mode, optimizer="brute", 
+                                    optparms=optparms, selection_A=train_group, selection_B=test_group, 
+                                    prefix="k%d."%i + prefix, verbose=verbose)
 
-        fitter.optimize(niter=niter,
-                        nmin=nmin,
-                        kforce=kforce,
-                        gradient=gradient,
-                        print_fun=_print_fun,
-                        popsize=popsize,
-                        stepsize=stepsize,
-                        optimizer=optimizer)
+            for key, value in parmdict.items():
+                if key=="header":
+                    continue
+                x = np.array(value[:fitter._parms])
+
+                _print_fun(x)
+                _print_fun.flush()
+
+        else:
+            if verbose:
+                print "Start optimization for ksplit=%d ..." %i
+
+            _print_fun = print_fun(fitter=fitter, mode=mode, optimizer=optimizer, 
+                                    optparms=optparms, selection_A=train_group, selection_B=test_group, 
+                                    prefix="k%d."%i + prefix, verbose=verbose)
+
+            fitter.optimize(niter=niter,
+                            nmin=nmin,
+                            kforce=kforce,
+                            gradient=gradient,
+                            print_fun=_print_fun,
+                            popsize=popsize,
+                            stepsize=stepsize,
+                            optimizer=optimizer)
 
         if verbose:
             print "Generating output ..."

@@ -190,6 +190,13 @@ in evolution optimization.')
                         help='Choice of base GIST scoring function')
 
 
+    parser.add_argument('-sc', '--scaling',
+                        required=False,
+                        type=float,
+                        default=2.,
+                        help='Energy scaling factor. Default is 2.')
+
+
     parser.add_argument('-dE', '--decomp_E',
                         action='store_true',
                         help='Activate partial decomposition mode with only energy. Note, that when both --decomp_E and --decomp_S \
