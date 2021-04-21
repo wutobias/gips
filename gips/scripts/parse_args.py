@@ -10,14 +10,9 @@ def parse_args():
                 ]
 
     parser = argparse.ArgumentParser(
-        description="Executable for Gips (GIST-based processing of solvent functionals). A program for\
-        modelling of solvation thermodynamics with particular focus on drug discovery. \
-        Many of the routines were developed during the PhD student time of the main devoloper from 08/2015 to 06/2019. \
-        The final program was written and developed between 12/2018 and 03/2019. \
-        The program is written and maintained by Tobias Wulsdorf, \
-        Marburg University. Scientific Supervision was carried out by Gerhard Klebe and \
-        Peter Kolb at Marburg University. Contact via email tobias.wulsdorf@gmail.com or \
-        the GitHub page of the main developer https://github.com/wutobias")
+        description="Executable for Gips (GIST-based processing of solvent functionals). \
+        A program for modelling of solvation thermodynamics based on GIST data with particular focus on drug discovery. \
+        For documentation and examples see the GitHub page: github.com/wutobias/gips")
 
     ### Required Arguments
     ### ~~~~~~~~~~~~~~~~~~
