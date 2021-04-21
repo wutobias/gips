@@ -2,7 +2,7 @@ from setuptools import setup, Extension, find_packages
 import os
 import numpy as np
 
-__version__ = "0.6"
+__version__ = "0.7"
 
 # define the extension module
 extensions = []
@@ -32,10 +32,10 @@ extensions.append(Extension('gips.gistmodel._numerical_ext',
                             language='c'))
 
 setup(name='gips',
-    author='Tobias Wulsdorf',
-    author_email='tobias.wulsdorf@gmail.com',
+    author='Tobias Huefner',
+    author_email='thuefner@ucsd.edu',
     description='gips: Modelling Toolkit for Solvation-based Structure Affinity Relationships. \
-Developed by Tobias Wulsdorf in the group of Prof. Gerhard Klebe at Marburg University.',
+For documentation and examples see the GitHub page: github.com/wutobias/gips',
     version=__version__,
     license='MIT',
     platforms=['Linux'],
