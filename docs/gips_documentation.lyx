@@ -1,5 +1,5 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -11,25 +11,28 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
+\font_roman "times" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
-\font_default_family default
+\font_default_family rmdefault
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
 \graphics default
 \default_output_format default
 \output_sync 0
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing onehalf
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -49,15 +52,23 @@
 \suppress_date false
 \justification true
 \use_refstyle 1
+\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 3cm
+\bottommargin 2cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -77,39 +88,903 @@ Gips
 \end_layout
 
 \begin_layout Author
-Tobias Wulsdorf, Gerhard Klebe
+Tobias Huefner
 \end_layout
 
-\begin_layout Part
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Getting started
+\end_layout
+
+\begin_layout Subsection
 Installation
 \end_layout
 
 \begin_layout Standard
-bla
+We assume you have a working conda distribution on your system, e.g.
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "miniconda"
+target "https://docs.conda.io/en/latest/miniconda.html"
+literal "false"
+
+\end_inset
+
+ or 
+\begin_inset CommandInset href
+LatexCommand href
+name "anaconda"
+target "https://anaconda.org/"
+literal "false"
+
+\end_inset
+
+.
+ If not, we recommend you start by setting up a conda distribution on your
+ machine before you go on with the installation of 
+\shape smallcaps
+Gips
+\shape default
+.
+ There are tons resources on the internet on how to set up conda.
+ If you have conda up and running on your machine, clone the newest version
+ of the program from GitHub and change to the main directory:
 \end_layout
 
-\begin_layout Part
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=5"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+git clone github.com/wutobias/gips
+\end_layout
+
+\begin_layout Plain Layout
+
+cd gips
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then, build a conda environment for gips and activate it:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=5"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+conda create --name gips -f gips.yml
+\end_layout
+
+\begin_layout Plain Layout
+
+conda activate gips
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this environment, install 
+\shape smallcaps
+Gips
+\shape default
+
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=5"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+python setup.py install
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now you are ready to go.
+ The command line executable 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=5"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+run_gips
+\end_layout
+
+\end_inset
+
+ is now ready and the python libraries can be used from the module 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=5"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+gips
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Testing
+\end_layout
+
+\begin_layout Standard
+The program 
+\shape smallcaps
+Gips
+\shape default
+ comes with a small set of tests that can used to check that the program
+ is working as it should.
+ Download ...
+\end_layout
+
+\begin_layout Section
 Usage
 \end_layout
 
 \begin_layout Standard
-bla
+In the following, the command line options for 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=5"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+run_gips
 \end_layout
 
-\begin_layout Part
+\end_inset
+
+ will explained.
+ A brief explanation of each option can also be obtained through the command
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+run_gips --help
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Input data for Gips
+\end_layout
+
+\begin_layout Subsubsection
+GIST data
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:GIST-data"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The GIST data that is used by Gips must be generated by the user.
+ Gips itself will not generate any GIST data.
+ It is important that the GIST grids are located in the same place where
+ the investigated ligands are located.
+ Gips expects the GIST data to be formated in a csv file in a format that
+ follows the formatting generated by the GIST implementation of Cpptraj.
+ Files that are generated by other software may or may not be read correctly.
+\end_layout
+
+\begin_layout Subsubsection
+Structural and molecule data
+\end_layout
+
+\begin_layout Standard
+Currently, Gips expects that molecules are parsed as Amber restart (.rst)
+ and Amber topology (.prmtop) files.
+ Furthermore, it is possible to define binding pockets on a protein or select
+ only parts of ligands in the input molecules.
+ This is accomplished based on Amber-style selection syntax.
+ The selection syntax is very easy to learn and is nicely described in the
+ reference manual of the newest Amber manual.
+\end_layout
+
+\begin_layout Subsection
+Command line options for 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=5"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+run_gips
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},tabsize=5"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+run_gips
+\end_layout
+
+\end_inset
+
+ program must be exectuted in one of its five run modes.
+ Each of these run modes have different options and can do different things,
+ as will be explained in the following.
+\end_layout
+
+\begin_layout Subsubsection
+GIST data input file
+\end_layout
+
+\begin_layout Standard
+Gips uses many GIST data files from different molecules at the same time.
+ In order to tell Gips which GIST data and molecule files to use, the user
+ must provide a GIST data input file.
+ An example file can be found at the end of this section.
+ In the following all input options that go into the input file are explained.
+ The depth of of the indentation reflects the hierarchy of the keywords
+ in the input file.
+ Every 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+init
+\end_layout
+
+\end_inset
+
+ statement creates a new layer of data and must be closed with an 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+ statement at the end of the layer.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+init gistdata-rec
+\series default
+: Initialze the gistdata-rec section.
+ This section contains GIST and structural data for the receptor protein.
+ This is the data being used for conventional displaced solvent functionals.
+ This section can only occur once but may contain multple receptors which
+ do not necessarily be related to each other.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+title
+\series default
+: This defines the name of the receptor.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+init receptor
+\series default
+: Initialize a new receptor structure.
+ The location of the GIST data files go into this section together with
+ structural information.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+gdat
+\series default
+: This is the path where the GIST data can be found.
+ Note the formatting of this file as explained in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "subsec:GIST-data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ This input option can occur multiple times, if the user wants to provide
+ GIST data computed for multiple regions in the binding site.
+ This can be beneficial if the region of interest is large and can be broken
+ down into multiple single regions each with a single GIST calculations.
+ Gips will merge the multiple GIST grids into one large GIST grid.
+ Note that all GIST grids must overlap at the borders with their neighboring
+ GIST grids.
+ This can be conveniently accomplised with the 
+\begin_inset CommandInset href
+LatexCommand href
+name "SplitVolume.py"
+target "github.com/gosldorf/BiggerGist/blob/master/SplitVolume.py"
+literal "false"
+
+\end_inset
+
+ python script.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+topo
+\series default
+: Amber topology file (.prmtop) corresponding to the system that was used
+ to compute the molecular dynamics trajectory for the GIST calculation.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+strc
+\series default
+: Amber restart file (.rst) corresponding to the structure that was used
+ to compute the molecular dynamics trajectory for the GIST calculation.
+ This structure should be the reference structure that was used for restraining
+ the protein during the molecular dynamics simulation in order prevent rotation
+ and translation.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+sele:
+\series default
+ With this argument the user may define the binding pocket through Amber-style
+ selection syntax.
+ These could be atoms and residues in the binding pocket of the protein.
+ This atom selection is mainly used to cut down the binding site and make
+ the calculations faster.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+w
+\series default
+: All GIST data in this section will be multiplied by this weighting factor.
+ However, before this number is actually used it will be normlized with
+ respect to all other weighting factors, in case multiple receptor sections
+ are provided by the user.
+ A good reason to provide weights is when each receptor section represents
+ structures that have different probabilities, for instance computed from
+ a clustering analysis.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+end receptor
+\series default
+: Finish this receptor section.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+end gistdata-rec
+\series default
+: Finish the gistdata-rec section.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+init gistdata
+\series default
+: Initialize a section containing all the other GIST data that can be used
+ by Gips (GIST data from ligands in solution, bound protein-ligand complexes).
+ This section can occure multiple times, for instance one for each ligand.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+title
+\series default
+: The title of this gistdata section must be unique.
+ It will be used to reference data when splitting datasets or fragmenting
+ molecules.
+ The user should provide a name that can easily traced back to the molecule
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+dg
+\series default
+: Free energy value used for fitting the solvent functionals.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+dh
+\series default
+: Enthalpy value used for fitting the solvent functionals.
+ Only used for multi-objective parameter optimization.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+ds
+\series default
+: Entropy value used for fitting the solvent functionals.
+ Only used for multi-objective parameter optimization.
+ Note that the program assumes that the entropy is already multiplied by
+ temperature.
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Example GIST data input file
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\footnotesize},showstringspaces=false,tabsize=6"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+init gistdata-rec
+\end_layout
+
+\begin_layout Plain Layout
+
+	title apo
+\end_layout
+
+\begin_layout Plain Layout
+
+	init receptor
+\end_layout
+
+\begin_layout Plain Layout
+
+		gdat apo/gist/rprod.c0.1/gist/t49/gist1/gist.dat
+\end_layout
+
+\begin_layout Plain Layout
+
+		gdat apo/gist/rprod.c0.1/gist/t49/gist2/gist.dat
+\end_layout
+
+\begin_layout Plain Layout
+
+		topo apo/gist/prep/apo.prmtop
+\end_layout
+
+\begin_layout Plain Layout
+
+		strc apo/gist/rprod.c0.1/gist/t0/gist.rst7
+\end_layout
+
+\begin_layout Plain Layout
+
+		sele :73,77,80,122,124,125,126,209,229,230,231&!(@H=|@h=)
+\end_layout
+
+\begin_layout Plain Layout
+
+		w    0.5843
+\end_layout
+
+\begin_layout Plain Layout
+
+	end receptor
+\end_layout
+
+\begin_layout Plain Layout
+
+	init receptor
+\end_layout
+
+\begin_layout Plain Layout
+
+		gdat apo/gist/rprod.c1.1/gist/t49/gist1/gist.dat
+\end_layout
+
+\begin_layout Plain Layout
+
+		gdat apo/gist/rprod.c1.1/gist/t49/gist2/gist.dat
+\end_layout
+
+\begin_layout Plain Layout
+
+		topo apo/gist/prep/apo.prmtop
+\end_layout
+
+\begin_layout Plain Layout
+
+		strc apo/gist/rprod.c1.1/gist/t0/gist.rst7
+\end_layout
+
+\begin_layout Plain Layout
+
+		sele :73,77,80,122,124,125,126,209,229,230,231&!(@H=|@h=)
+\end_layout
+
+\begin_layout Plain Layout
+
+		w    0.276
+\end_layout
+
+\begin_layout Plain Layout
+
+	end receptor
+\end_layout
+
+\begin_layout Plain Layout
+
+	init receptor
+\end_layout
+
+\begin_layout Plain Layout
+
+		gdat apo/gist/rprod.c2.1/gist/t49/gist1/gist.dat
+\end_layout
+
+\begin_layout Plain Layout
+
+		gdat apo/gist/rprod.c2.1/gist/t49/gist2/gist.dat
+\end_layout
+
+\begin_layout Plain Layout
+
+		topo apo/gist/prep/apo.prmtop
+\end_layout
+
+\begin_layout Plain Layout
+
+		strc apo/gist/rprod.c2.1/gist/t0/gist.rst7
+\end_layout
+
+\begin_layout Plain Layout
+
+		sele :73,77,80,122,124,125,126,209,229,230,231&!(@H=|@h=)
+\end_layout
+
+\begin_layout Plain Layout
+
+		w    0.1396
+\end_layout
+
+\begin_layout Plain Layout
+
+	end receptor
+\end_layout
+
+\begin_layout Plain Layout
+
+end gistdata-rec
+\end_layout
+
+\begin_layout Plain Layout
+
+init gistdata
+\end_layout
+
+\begin_layout Plain Layout
+
+	title 3QTV
+\end_layout
+
+\begin_layout Plain Layout
+
+	dg    -5.732
+\end_layout
+
+\begin_layout Plain Layout
+
+	dh    -5.637
+\end_layout
+
+\begin_layout Plain Layout
+
+	ds     0.096
+\end_layout
+
+\begin_layout Plain Layout
+
+	init pose
+\end_layout
+
+\begin_layout Plain Layout
+
+		topo 3QTV/gist1/rprod/gist/t0/gist.prmtop
+\end_layout
+
+\begin_layout Plain Layout
+
+		strc 3QTV/gist1/rprod/gist/t0/align.gist.c0.1.rst7
+\end_layout
+
+\begin_layout Plain Layout
+
+		sele :1&!(@H=|@h=)
+\end_layout
+
+\begin_layout Plain Layout
+
+		ref 1.1
+\end_layout
+
+\begin_layout Plain Layout
+
+	end pose
+\end_layout
+
+\begin_layout Plain Layout
+
+	init pose
+\end_layout
+
+\begin_layout Plain Layout
+
+		topo 3QTV/gist1/rprod/gist/t0/gist.prmtop
+\end_layout
+
+\begin_layout Plain Layout
+
+		strc 3QTV/gist1/rprod/gist/t0/align.gist.c1.1.rst7
+\end_layout
+
+\begin_layout Plain Layout
+
+		sele :1&!(@H=|@h=)
+\end_layout
+
+\begin_layout Plain Layout
+
+		ref 1.2
+\end_layout
+
+\begin_layout Plain Layout
+
+	end pose
+\end_layout
+
+\begin_layout Plain Layout
+
+	init pose
+\end_layout
+
+\begin_layout Plain Layout
+
+		topo 3QTV/gist1/rprod/gist/t0/gist.prmtop
+\end_layout
+
+\begin_layout Plain Layout
+
+		strc 3QTV/gist1/rprod/gist/t0/align.gist.c2.1.rst7
+\end_layout
+
+\begin_layout Plain Layout
+
+		sele :1&!(@H=|@h=)
+\end_layout
+
+\begin_layout Plain Layout
+
+		ref 1.3
+\end_layout
+
+\begin_layout Plain Layout
+
+	end pose
+\end_layout
+
+\begin_layout Plain Layout
+
+	init complex
+\end_layout
+
+\begin_layout Plain Layout
+
+		gdat 3QTV/gist1/rprod/gist/t49/gist1/gist.dat
+\end_layout
+
+\begin_layout Plain Layout
+
+		gdat 3QTV/gist1/rprod/gist/t49/gist2/gist.dat
+\end_layout
+
+\begin_layout Plain Layout
+
+		topo 3QTV/gist1/prep/3QTV.prmtop
+\end_layout
+
+\begin_layout Plain Layout
+
+		strc 3QTV/gist1/rprod/gist/t0/gist.rst7 
+\end_layout
+
+\begin_layout Plain Layout
+
+		sele :1&!(@H=|@h=)
+\end_layout
+
+\begin_layout Plain Layout
+
+		w    1.0
+\end_layout
+
+\begin_layout Plain Layout
+
+	end complex
+\end_layout
+
+\begin_layout Plain Layout
+
+	init ligand
+\end_layout
+
+\begin_layout Plain Layout
+
+		gdat 3QTV/lig/gist1/rprod/gist/t49/gist1/gist.dat
+\end_layout
+
+\begin_layout Plain Layout
+
+		gdat 3QTV/lig/gist1/rprod/gist/t49/gist2/gist.dat
+\end_layout
+
+\begin_layout Plain Layout
+
+		topo 3QTV/lig/gist1/prep/3QTV_lig.prmtop
+\end_layout
+
+\begin_layout Plain Layout
+
+		strc 3QTV/lig/gist1/rprod/gist/t0/gist.rst7
+\end_layout
+
+\begin_layout Plain Layout
+
+		sele :1&!(@H=|@h=)
+\end_layout
+
+\begin_layout Plain Layout
+
+		w    1.0
+\end_layout
+
+\begin_layout Plain Layout
+
+	end ligand
+\end_layout
+
+\begin_layout Plain Layout
+
+end gistdata
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+mode: gistfit
+\end_layout
+
+\begin_layout Standard
+This is the most important run mode of the program, since it carries out
+ the fitting of the GIST-based solvent functionals.
+\end_layout
+
+\begin_layout Subsubsection
+mode: buildlib
+\end_layout
+
+\begin_layout Subsubsection
+mode: mapout
+\end_layout
+
+\begin_layout Subsubsection
+mode: decompose
+\end_layout
+
+\begin_layout Subsubsection
+mode: split
+\end_layout
+
+\begin_layout Section
+Remarks
+\end_layout
+
+\begin_layout Subsection
+How to generate GIST data using molecular dynamics
+\end_layout
+
+\begin_layout Section
 Examples
 \end_layout
 
 \begin_layout Standard
-bla
-\end_layout
-
-\begin_layout Part
-Remarks
-\end_layout
-
-\begin_layout Standard
-bla
+blabla
 \end_layout
 
 \end_body
