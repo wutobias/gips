@@ -35,28 +35,28 @@ class print_fun(object):
             self.N_len = self.fitter.N_case
 
         if self.mode==0:
-            self.parmidx = range(self.parms)
+            self.parmidx = list(range(self.parms))
         elif self.mode==1:
-            self.parmidx = range(self.parms+1)
+            self.parmidx = list(range(self.parms+1))
         elif self.mode==3:
-            self.parmidx = range(self.parms)
+            self.parmidx = list(range(self.parms))
         elif self.mode==4:
-            self.parmidx = range(self.parms+1)
+            self.parmidx = list(range(self.parms+1))
         elif self.mode==5:
             if self.pairs:
-                self.parmidx = range(self.parms+1)
+                self.parmidx = list(range(self.parms+1))
             else:
-                self.parmidx = range(self.parms+2)
+                self.parmidx = list(range(self.parms+2))
         elif self.mode==6:
             if self.pairs:
-                self.parmidx = range(self.parms+2)
+                self.parmidx = list(range(self.parms+2))
             else:
-                self.parmidx = range(self.parms+3)
+                self.parmidx = list(range(self.parms+3))
         elif self.mode==7:
             if self.pairs:
-                self.parmidx = range(self.parms+4)
+                self.parmidx = list(range(self.parms+4))
             else:
-                self.parmidx = range(self.parms+7)
+                self.parmidx = list(range(self.parms+7))
         else:
             mode_error(self.mode)
 
@@ -99,7 +99,7 @@ class print_fun(object):
         self.modelparms.write("### Hostname: %s\n" %socket.gethostname())
         self.modelparms.write("### The entropy contribution to free energy is calculated at 300 K\n")
         if isinstance(self.optparms, dict):
-            for key, value in self.optparms.items():
+            for key, value in list(self.optparms.items()):
                 self.modelparms.write("### %s: %s\n" %(key, value))
         self.modelparms.write("###\n")
         self.modelparms.write("### Step ")
@@ -152,7 +152,7 @@ class print_fun(object):
         self.modelprediction.write("### Hostname: %s\n" %socket.gethostname())
         self.modelprediction.write("### All units in [kcal/mol]\n")
         if isinstance(self.optparms, dict):
-            for key, value in self.optparms.items():
+            for key, value in list(self.optparms.items()):
                 self.modelprediction.write("### %s: %s\n" %(key, value))
         self.modelprediction.write("###\n")
         self.modelprediction.write("### Model values.\n")
@@ -200,7 +200,7 @@ class print_fun(object):
         self.modeldiff.write("### Hostname: %s\n" %socket.gethostname())
         self.modeldiff.write("### All units in [kcal/mol]\n")
         if isinstance(self.optparms, dict):
-            for key, value in self.optparms.items():
+            for key, value in list(self.optparms.items()):
                 self.modeldiff.write("### %s: %s\n" %(key, value))
         self.modeldiff.write("###\n")
         self.modeldiff.write("### Model-Exp difference.\n")

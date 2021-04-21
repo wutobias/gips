@@ -17,7 +17,7 @@ def get_frag_list(mol):
 
     hierarch  = Recap.RecapDecompose(mol, minFragmentSize=5)
     frag_list = list()
-    for frag_smi in hierarch.GetLeaves().keys():
+    for frag_smi in list(hierarch.GetLeaves().keys()):
         frag_mol = Chem.MolFromSmiles(frag_smi)
         frag_list.append(frag_mol)
 

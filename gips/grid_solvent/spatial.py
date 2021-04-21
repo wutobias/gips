@@ -63,7 +63,7 @@ def make_grid(arrays, out=None):
     if arrays[1:]:
         make_grid(arrays[1:], out=out[0:m,1:])
 
-        for j in xrange(1, arrays[0].size):
+        for j in range(1, arrays[0].size):
             out[j*m:(j+1)*m,1:] = out[0:m,1:]
 
     return out
@@ -647,7 +647,7 @@ def make_grid(arrays, out=None):
 
         make_grid(arrays[1:], out=out[0:m,1:])
 
-        for j in xrange(1, arrays[0].size):
+        for j in range(1, arrays[0].size):
 
             out[j*m:(j+1)*m,1:] = out[0:m,1:]
 
@@ -668,9 +668,9 @@ def bounding_edge_frac(frac_structure, delta=np.ones(3), _buffer=0., verbose=Fal
     bounding_max += int(np.round(_buffer))
 
     if verbose:
-        print "Bounding min. ", bounding_min
-        print "Bounding max. ", bounding_max
-        print np.arange(bounding_min[2], bounding_max[2]+1, delta[2], dtype=int )
+        print("Bounding min. ", bounding_min)
+        print("Bounding max. ", bounding_max)
+        print(np.arange(bounding_min[2], bounding_max[2]+1, delta[2], dtype=int ))
 
     return bounding_min, bounding_max
 
@@ -704,7 +704,7 @@ def py_axis_paral(query, target, verbose=0):
             if idx1 >= idx2:
                 continue
             if verbose:
-                print( "Iteration (%d %d)" %(idx1, idx2))
+                print(( "Iteration (%d %d)" %(idx1, idx2)))
             v  = query[idx2] - query[idx1]
             v  /= np.linalg.norm(v)
             # First vector found gives reference orientation

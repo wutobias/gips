@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import numpy as np
 
 from gips import FLOAT
@@ -135,24 +137,24 @@ frag_id:%d, internal_id:%d, mol_id:%d, frag_map:%s" %(frag_id, internal_id, pose
                 calc_data[1,frag_id] += self.fragmatrix[1,pose,frag_id] * w[recep]
 
         if self.verbose:
-            print "name: (%s) %s" %(self.prefix, self.fitter.name[self.case]),
+            print("name: (%s) %s" %(self.prefix, self.fitter.name[self.case]), end=' ')
             
-            print "dG(calc): %s" %(calc_data[0]+calc_data[1]),
-            print "dG(sum) : %6.3f" %(np.sum(calc_data[0]+calc_data[1])),
+            print("dG(calc): %s" %(calc_data[0]+calc_data[1]), end=' ')
+            print("dG(sum) : %6.3f" %(np.sum(calc_data[0]+calc_data[1])), end=' ')
             for f in range(N_frag):
-                print "f%d: %6.3f" %(f, calc_data[0,f]+calc_data[1,f]),
-            print ""
+                print("f%d: %6.3f" %(f, calc_data[0,f]+calc_data[1,f]), end=' ')
+            print("")
             
-            print "dH(calc): %s" %(calc_data[0]),
-            print "dH(sum): %6.3f" %(np.sum(calc_data[0])),
+            print("dH(calc): %s" %(calc_data[0]), end=' ')
+            print("dH(sum): %6.3f" %(np.sum(calc_data[0])), end=' ')
             for f in range(N_frag):
-                print "f%d: %6.3f" %(f, calc_data[0,f]),
-            print ""
+                print("f%d: %6.3f" %(f, calc_data[0,f]), end=' ')
+            print("")
             
-            print "dS(calc): %s" %(calc_data[1]),
-            print "dS(sum): %6.3f" %(np.sum(calc_data[1])),
+            print("dS(calc): %s" %(calc_data[1]), end=' ')
+            print("dS(sum): %6.3f" %(np.sum(calc_data[1])), end=' ')
             for f in range(N_frag):
-                print "f%d: %6.3f" %(f, calc_data[1,f]),
-            print ""
+                print("f%d: %6.3f" %(f, calc_data[1,f]), end=' ')
+            print("")
 
         return np.copy(calc_data), np.copy(frag_assign)

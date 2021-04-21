@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import numpy as np
 
 class propagator(object):
@@ -120,10 +122,10 @@ class gist_bounds(object):
                 self.P_avg /= self.iter
                 if self.P_avg > self.Ptarget:
                     if self.verbose:
-                        print "Attempting temperature change %6.3f" %self.T,
+                        print("Attempting temperature change %6.3f" %self.T, end=' ')
                     self.T += self.T_delta
                     if self.verbose:
-                        print "-> %6.3f" %self.T
+                        print("-> %6.3f" %self.T)
                 self.iter   = 0
                 self.P_avg  = 0.
 

@@ -11,7 +11,7 @@ class aux_progs(object):
         if self.AMBERHOME == None:
             raise Warning("Environment variable AMBERHOME not set!")
 
-        self.ante_exe    = self.AMBERHOME+"/bin/antechamber"
+        self.ante_exe    = self.AMBERHOME+"/bin/antechamber -pf y -dr no"
         self.respgen_exe = self.AMBERHOME+"/bin/respgen"
         self.espgen_exe  = self.AMBERHOME+"/bin/espgen"
         self.resp_exe    = self.AMBERHOME+"/bin/resp"
@@ -24,7 +24,6 @@ class aux_progs(object):
         else:
             self.stdout = open(os.devnull, 'w')
             self.stderr = open(os.devnull, 'w')
-
 
     def call(self, prog, args):
 
@@ -43,7 +42,7 @@ def are_mol_same(mol1, mol2, useChirality=True):
     mol1_length = mol1.GetNumAtoms()
     mol2_length = mol2.GetNumAtoms()
     if mol1_length == mol2_length:
-        mol1_atoms  = range(mol1_length)
+        mol1_atoms  = list(range(mol1_length))
         ### If both have same number of atoms.
         if mol1_length == mol2_length:
             matches = mol1.GetSubstructMatches(mol2, useChirality=useChirality)

@@ -69,9 +69,9 @@ class gist(field):
         """
 
         if bins.shape[0] != 3:
-          print "Target bins array must habe shape (3,)"
+          print("Target bins array must habe shape (3,)")
         elif self.bins[0] < bins[0] or self.bins[1] < bins[1] or self.bins[2] < bins[2]:
-          print "Target bins array must be smaller than original one."
+          print("Target bins array must be smaller than original one.")
         else:
             cut      = (self.bins - bins)/2
             cut_bins = np.array([[cut[0], cut[0]],

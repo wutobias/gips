@@ -50,7 +50,7 @@ class gdat_fit_lib(object):
 
         majcount = 1
         ### Count all receptor data objects
-        for rec_keys in self.gdatarec_dict.keys():
+        for rec_keys in list(self.gdatarec_dict.keys()):
             mincount = 1
             recdict  = self.gdatarec_dict[rec_keys]
             for i in range(len(recdict["receptor"])):
@@ -68,7 +68,7 @@ class gdat_fit_lib(object):
             majcount   += 1
 
         ### Count all pose data objects
-        for pos_keys in self.gdata_dict.keys():
+        for pos_keys in list(self.gdata_dict.keys()):
             posdict = self.gdata_dict[pos_keys]
             if posdict["title"] in self.exclude:
                 continue
@@ -80,7 +80,7 @@ class gdat_fit_lib(object):
                 self.N_pos += 1
 
         ### Count all complex data objects
-        for pos_keys in self.gdata_dict.keys():
+        for pos_keys in list(self.gdata_dict.keys()):
             posdict = self.gdata_dict[pos_keys]
             if posdict["title"] in self.exclude:
                 continue
@@ -94,7 +94,7 @@ class gdat_fit_lib(object):
                             self.maxdim[j] = posdict["complex"][i]["gdat"].bins[j]
 
         ### Count all ligand data objects
-        for pos_keys in self.gdata_dict.keys():
+        for pos_keys in list(self.gdata_dict.keys()):
             posdict = self.gdata_dict[pos_keys]
             if posdict["title"] in self.exclude:
                 continue
@@ -108,12 +108,12 @@ class gdat_fit_lib(object):
                             self.maxdim[j] = posdict["ligand"][i]["gdat"].bins[j]
 
         if self.verbose:
-            print "Maxium bin dimensions found %s ..." %self.maxdim
-            print "Number of receptor found %d ..." %self.N_rec
-            print "Number of poses found %d ..." %self.N_pos
-            print "Number of cases found %d ..." %self.N_case
-            print "Number of complexes found %d ..." %self.N_cplx
-            print "Number of ligands found %d ..." %self.N_lig
+            print("Maxium bin dimensions found %s ..." %self.maxdim)
+            print("Number of receptor found %d ..." %self.N_rec)
+            print("Number of poses found %d ..." %self.N_pos)
+            print("Number of cases found %d ..." %self.N_case)
+            print("Number of complexes found %d ..." %self.N_cplx)
+            print("Number of ligands found %d ..." %self.N_lig)
 
 
     def prepare_gdat(self):
@@ -144,7 +144,7 @@ class gdat_fit_lib(object):
 
             i_ref=0
             i_pose=0
-            for rec_keys in self.gdatarec_dict.keys():
+            for rec_keys in list(self.gdatarec_dict.keys()):
                 recdict = self.gdatarec_dict[rec_keys]
                 w_sum   = 0.
                 w_list  = list()
@@ -175,7 +175,7 @@ class gdat_fit_lib(object):
 
             i_pose=0
             i_case=0
-            for pos_keys in self.gdata_dict.keys():
+            for pos_keys in list(self.gdata_dict.keys()):
                 posdict = self.gdata_dict[pos_keys]
                 if posdict["title"] in self.exclude:
                     continue
@@ -188,7 +188,7 @@ class gdat_fit_lib(object):
 
                     self.pdat.append(posdict["pose"][i]["pmd"])
 
-                    if posdict["pose"][i]["ref"] not in self.ref_dict.keys():
+                    if posdict["pose"][i]["ref"] not in list(self.ref_dict.keys()):
                         raise IOError("Cannot find receptor reference %s" %posdict["pose"][i]["ref"] )
                     ref_id = self.ref_dict[posdict["pose"][i]["ref"]]
                     self.ind_rec[i_pose]  = ref_id
@@ -244,7 +244,7 @@ class gdat_fit_lib(object):
             self.ds  = np.zeros(self.N_case, dtype=DOUBLE)
 
             i_ref=0
-            for rec_keys in self.gdatarec_dict.keys():
+            for rec_keys in list(self.gdatarec_dict.keys()):
                 recdict = self.gdatarec_dict[rec_keys]
                 w_sum   = 0.
                 w_list  = list()
@@ -274,7 +274,7 @@ class gdat_fit_lib(object):
 
             i_pose=0
             i_case=0
-            for pos_keys in self.gdata_dict.keys():
+            for pos_keys in list(self.gdata_dict.keys()):
                 posdict = self.gdata_dict[pos_keys]
                 if posdict["title"] in self.exclude:
                     continue
@@ -287,7 +287,7 @@ class gdat_fit_lib(object):
 
                     self.pdat.append(posdict["pose"][i]["pmd"])
 
-                    if posdict["pose"][i]["ref"] not in self.ref_dict.keys():
+                    if posdict["pose"][i]["ref"] not in list(self.ref_dict.keys()):
                         raise IOError("Cannot find receptor reference %s" %posdict["pose"][i]["ref"] )
                     ref_id = self.ref_dict[posdict["pose"][i]["ref"]]
                     self.ind_rec[i_pose]  = ref_id
@@ -333,7 +333,7 @@ class gdat_fit_lib(object):
 
             i_cplx=0
             i_case=0
-            for cplx_keys in self.gdata_dict.keys():
+            for cplx_keys in list(self.gdata_dict.keys()):
                 cplxdict = self.gdata_dict[cplx_keys]
                 if cplxdict["title"] in self.exclude:
                     continue
@@ -402,7 +402,7 @@ class gdat_fit_lib(object):
 
             i_lig=0
             i_case=0
-            for lig_keys in self.gdata_dict.keys():
+            for lig_keys in list(self.gdata_dict.keys()):
                 ligdict = self.gdata_dict[lig_keys]
                 if ligdict["title"] in self.exclude:
                     continue

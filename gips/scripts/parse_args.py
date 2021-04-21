@@ -79,15 +79,8 @@ def parse_args():
                         required=False,
                         type=int,
                         default=500,
-                        help='Number MC attempts in basinhopping optimization or number of generations \
+                        help='Number MC attempts in basinhopping optimization before termination or number of generations \
 in evolution optimization.')
-
-
-    parser.add_argument('-nm', '--nmin',
-                        required=False,
-                        type=int,
-                        default=1000,
-                        help='Number maximum minimization steps after each MC move.')
 
 
     parser.add_argument('-pop', '--popsize',

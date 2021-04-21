@@ -210,16 +210,16 @@ def read_gistin(path):
                     gdatarec_list.append(OrderedDict())
                     read_gistdatarec = True
 
-                elif l[1] in allowed_inits_gistdata.keys():
+                elif l[1] in list(allowed_inits_gistdata.keys()):
                     name_init = l[1]
-                    if name_init not in gdata_list[-1].keys():
+                    if name_init not in list(gdata_list[-1].keys()):
                         gdata_list[-1][name_init] = list()
                     gdata_list[-1][name_init].append(OrderedDict())
                     read_init = True
 
-                elif l[1] in allowed_inits_gistdatarec.keys():
+                elif l[1] in list(allowed_inits_gistdatarec.keys()):
                     name_init = l[1]
-                    if name_init not in gdatarec_list[-1].keys():
+                    if name_init not in list(gdatarec_list[-1].keys()):
                         gdatarec_list[-1][name_init] = list()
                     gdatarec_list[-1][name_init].append(OrderedDict())
                     read_init = True
@@ -242,23 +242,23 @@ def read_gistin(path):
 
             elif read_init:
                 if read_gistdata and l[0] in allowed_inits_gistdata[name_init]:
-                    if l[0] not in gdata_list[-1][name_init][-1].keys():
+                    if l[0] not in list(gdata_list[-1][name_init][-1].keys()):
                         gdata_list[-1][name_init][-1][l[0]] = list()
                     gdata_list[-1][name_init][-1][l[0]].append(l[1])
                 elif read_gistdatarec and l[0] in allowed_inits_gistdatarec[name_init]:
-                    if l[0] not in gdatarec_list[-1][name_init][-1].keys():
+                    if l[0] not in list(gdatarec_list[-1][name_init][-1].keys()):
                         gdatarec_list[-1][name_init][-1][l[0]] = list()
                     gdatarec_list[-1][name_init][-1][l[0]].append(l[1])
                 else:
                     __raiseIO(line_idx+1)
 
             elif read_gistdata and l[0] in allowed_options_gistdata:
-                if l[0] not in gdata_list[-1].keys():
+                if l[0] not in list(gdata_list[-1].keys()):
                     gdata_list[-1][l[0]] = list()
                 gdata_list[-1][l[0]].append(l[1])
 
             elif read_gistdatarec and l[0] in allowed_options_gistdatarec:
-                if l[0] not in gdatarec_list[-1].keys():
+                if l[0] not in list(gdatarec_list[-1].keys()):
                     gdatarec_list[-1][l[0]] = list()
                 gdatarec_list[-1][l[0]].append(l[1])
 
@@ -309,7 +309,7 @@ def write_maps(gistobject, prefix="gist", pymol=True):
         pymol_string += "from pymol import cmd\n"
         pymol_string += "\n"
 
-    for name, data in data_dict.items():
+    for name, data in list(data_dict.items()):
 
         write_files(Frac2Real=gistobject.get_nice_frac2real(), 
             Bins=gistobject.bins, 
@@ -547,10 +547,10 @@ class write_files(object):
         for xyz_i, xyz in enumerate(self._xyz):
 
             #iterate over uppercase letters
-            chain_id    = ascii_uppercase[( len(str(xyz_i+1)) / 5 )]
+            chain_id    = ascii_uppercase[int(len(str(xyz_i+1)) / 5 )]
 
-            atom_counts = xyz_i - ( len(str(xyz_i+1)) / 6 ) * 100000
-            resi_counts = xyz_i - ( len(str(xyz_i+1)) / 5 ) * 10000
+            atom_counts = xyz_i - int(len(str(xyz_i+1)) / 6 ) * 100000
+            resi_counts = xyz_i - int(len(str(xyz_i+1)) / 5 ) * 10000
             data += \
             '%-6s%5d %4s%1s%3s %1s%4d%1s   %8.3f%8.3f%8.3f%6.2f%6.2f          \n' \
             %('HETATM',atom_counts+1,'X','', 'MAP', chain_id, resi_counts+1, '', xyz[0], xyz[1], xyz[2], 0.00, float( self._value[xyz_i] ) )
@@ -600,33 +600,21 @@ object 3 class array type float rank 0 items %d data follows
 
         i = 0
         for x_i in range(0, self._bins[0]):
-
             for y_i in range(0, self._bins[1]):
-
                 for z_i in range(0, self._bins[2]):
-
                     ### writing an integer instead of float
                     ### saves us some disk space
                     if np.isnan(self._value[x_i][y_i][z_i]):
-
                         data += str(self._nan_fill) + " "
-
                     else:
-
                         if self._value[x_i][y_i][z_i] == 0.0:
-
                             data += "0 " 
-
                         else:
-
                             data += str(self._value[x_i][y_i][z_i]) + ' '
-                
                     i += 1
-
                     if i == 3:
-
                         data += '\n'
-                        i = 0
+                        i     = 0
         return data
 
 

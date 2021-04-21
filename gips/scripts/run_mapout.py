@@ -21,13 +21,13 @@ def mapout(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False,
             exclude=None, prefix=None, scaling=2.0, verbose=False):
 
     if verbose:
-        print "Start mapout procedure with"
-        print "mode      = %d" %mode
-        print "softness  = %6.3f" %softness
-        print "softcut   = %6.3f" %softcut
+        print("Start mapout procedure with")
+        print("mode      = %d" %mode)
+        print("softness  = %6.3f" %softness)
+        print("softcut   = %6.3f" %softcut)
 
     if verbose:
-        print "Organizing and preparing data ..."
+        print("Organizing and preparing data ...")
 
     mode_dict = dict()
     mode_dict = {0 : mode0,
@@ -38,7 +38,7 @@ def mapout(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False,
                  6 : mode6,
                  7 : mode7}
 
-    if mode in mode_dict.keys():
+    if mode in list(mode_dict.keys()):
         fitmode = mode_dict[mode]
     else:
         mode_error(mode)
@@ -73,7 +73,7 @@ def mapout(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False,
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
     ### Collect all the solutions
-    N_entries = len(parmdict.keys())-1
+    N_entries = len(list(parmdict.keys()))-1
 
     A_list = list()
     B_list = list()
@@ -82,7 +82,7 @@ def mapout(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False,
     B_list_tmp = list()
     x_list_tmp = list()
     
-    for key, value in parmdict.items():
+    for key, value in list(parmdict.items()):
         if key=="header":
             continue
         A_list_tmp.append(value[A_SSE])
@@ -146,7 +146,7 @@ def mapout(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False,
     ### Write out un-processed dx grids
     if mode in [0,1,2]:
         counter = 0
-        for rec_keys in fitter.gdatarec_dict.keys():
+        for rec_keys in list(fitter.gdatarec_dict.keys()):
             recdict = fitter.gdatarec_dict[rec_keys]
             title   = recdict["title"]
             if title == None:
@@ -161,7 +161,7 @@ def mapout(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False,
 
     else:
         counter = 0
-        for rec_keys in fitter.gdatarec_dict.keys():
+        for rec_keys in list(fitter.gdatarec_dict.keys()):
             recdict = fitter.gdatarec_dict[rec_keys]
             title   = recdict["title"]
             if title == None:
@@ -175,7 +175,7 @@ def mapout(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False,
             counter += 1
 
         counter = 0
-        for cplx_keys in fitter.gdata_dict.keys():
+        for cplx_keys in list(fitter.gdata_dict.keys()):
             cplxdict = fitter.gdata_dict[cplx_keys]
             if cplxdict["title"] in fitter.exclude:
                 continue

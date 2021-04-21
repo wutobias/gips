@@ -321,7 +321,7 @@ class MC_fitter(gdat_fit_lib):
             return 1
 
 
-    def optimize(self, niter=500, minimizer_kwargs=None, nmin=1000, 
+    def optimize(self, niter=500, minimizer_kwargs=None, 
                 kforce=100., gradient=False, print_fun=None, popsize=50,
                 stepsize=0.05, optimizer="evolution", seed=None):
 
@@ -360,9 +360,10 @@ class MC_fitter(gdat_fit_lib):
                 algo.set_verbosity(1)
             pop  = algo.evolve(pop)
 
-            for x in pop.get_x():
-                print_fun(x)
-                print_fun.flush()
+            if print_fun != None:
+                for x in pop.get_x():
+                    print_fun(x)
+                    print_fun.flush()
 
         elif optimizer=="brute":
             self.anal_grad     = False
@@ -379,18 +380,19 @@ class MC_fitter(gdat_fit_lib):
             stop  = False
             _stop = False
 
-            if nmin>0:
+            if niter>0:
                 self.anal_grad = True
                 self.anal_boundary = False
-                prob = pygmo.problem(self)
-                pop  = pygmo.population(prob=prob, size=1)
-                algo = pygmo.algorithm(pygmo.nlopt("slsqp"))
-                algo.maxeval = nmin
+                prob   = pygmo.problem(self)
+                pop    = pygmo.population(prob=prob, size=1)
+                min_al = pygmo.nlopt("slsqp")
+                min_al.maxeval = niter
+                algo   = pygmo.algorithm(min_al)
                 if self.verbose:
                     algo.set_verbosity(1)
 
             while (not stop):
-                if nmin>0:
+                if niter>0:
                     self.anal_grad = gradient
 
                     if self.anal_boundary:
@@ -418,15 +420,16 @@ class MC_fitter(gdat_fit_lib):
             prob = pygmo.problem(self)
             pop  = pygmo.population(prob=prob, size=popsize)
             algo = pygmo.algorithm(uda = pygmo.mbh(pygmo.nlopt("slsqp"), 
-                                                   stop = 100,
+                                                   stop = niter,
                                                    perturb = self.steps*0.1))
             if self.verbose:
                 algo.set_verbosity(1)
             pop  = algo.evolve(pop)
 
-            for x in pop.get_x():
-                print_fun(x)
-                print_fun.flush()
+            if print_fun != None:
+                for x in pop.get_x():
+                    print_fun(x)
+                    print_fun.flush()
 
         else:
             raise ValueError("Optimizer %s is not known." %optimizer)

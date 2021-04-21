@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import numpy as np
 
 import copy
@@ -37,14 +39,14 @@ def decomposition(gdatarec_lib, gdata_lib, mode, parms=6, pairs=True, parmsfile=
                 verbose=False):
 
     if verbose:
-        print "Start mapout procedure with"
-        print "mode      = %d" %mode
-        print "softness  = %6.3f" %softness
-        print "softcut   = %6.3f" %softcut
-        print "parmsfile = %s" %parmsfile
+        print("Start mapout procedure with")
+        print("mode      = %d" %mode)
+        print("softness  = %6.3f" %softness)
+        print("softcut   = %6.3f" %softcut)
+        print("parmsfile = %s" %parmsfile)
 
     if verbose:
-        print "Organizing and preparing data ..."
+        print("Organizing and preparing data ...")
 
     mode_dict = dict()
     mode_dict = {0 : mode0,
@@ -55,7 +57,7 @@ def decomposition(gdatarec_lib, gdata_lib, mode, parms=6, pairs=True, parmsfile=
                  6 : mode6,
                  7 : mode7}
 
-    if mode in mode_dict.keys():
+    if mode in list(mode_dict.keys()):
         fitmode = mode_dict[mode]
     else:
         mode_error(mode)
@@ -92,7 +94,7 @@ def decomposition(gdatarec_lib, gdata_lib, mode, parms=6, pairs=True, parmsfile=
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
     ### Collect all the solution candiates
-    N_entries = len(parmdict.keys())-1
+    N_entries = len(list(parmdict.keys()))-1
 
     A_list = list()
     B_list = list()
@@ -101,7 +103,7 @@ def decomposition(gdatarec_lib, gdata_lib, mode, parms=6, pairs=True, parmsfile=
     B_list_tmp = list()
     x_list_tmp = list()
     
-    for key, value in parmdict.items():
+    for key, value in list(parmdict.items()):
         if key=="header":
             continue
         A_list_tmp.append(value[A_SSE])
@@ -400,7 +402,7 @@ def decomposition(gdatarec_lib, gdata_lib, mode, parms=6, pairs=True, parmsfile=
                     ### The molecule is then treated, as if itself would
                     ### be the fragment
                     mol     = frag_lib.mol_list[mol_id]
-                    matches = range(mol.GetNumAtoms())
+                    matches = list(range(mol.GetNumAtoms()))
                 else:
                     matches = ext_map_inds[ext_mol_id][frag_id_rank]
 
@@ -419,7 +421,7 @@ def decomposition(gdatarec_lib, gdata_lib, mode, parms=6, pairs=True, parmsfile=
                         ### The molecule is then treated, as if itself would
                         ### be the fragment
                         mol     = frag_lib_cplx.mol_list[mol_id]
-                        matches = range(mol.GetNumAtoms())
+                        matches = list(range(mol.GetNumAtoms()))
                     else:
                         matches = ext_map_inds[ext_mol_id][frag_id_rank]
 
@@ -437,7 +439,7 @@ def decomposition(gdatarec_lib, gdata_lib, mode, parms=6, pairs=True, parmsfile=
                         ### The molecule is then treated, as if itself would
                         ### be the fragment
                         mol     = frag_lib_lig.mol_list[mol_id]
-                        matches = range(mol.GetNumAtoms())
+                        matches = list(range(mol.GetNumAtoms()))
                     else:
                         matches = ext_map_inds[ext_mol_id][frag_id_rank]
 
@@ -451,35 +453,35 @@ def decomposition(gdatarec_lib, gdata_lib, mode, parms=6, pairs=True, parmsfile=
             frag_lib_lig.refine()
 
     if verbose:
-        print "Poses Fragments..."
+        print("Poses Fragments...")
         for case in range(fitter.N_case):
             name        = fitter.name[case]
             valid_poses = np.where(fitter.ind_case==case)[0]
-            print name,
+            print(name, end=' ')
             for pose in valid_poses:
-                print frag_lib.mol2frag[pose],
-            print ""
+                print(frag_lib.mol2frag[pose], end=' ')
+            print("")
         frag_lib.draw("pos_")
 
         if has_cplxlig:
-            print "Cplx Fragments..."
+            print("Cplx Fragments...")
             for case in range(fitter.N_case):
                 name        = fitter.name[case]
                 valid_poses = np.where(fitter.ind_case_cplx==case)[0]
-                print name,
+                print(name, end=' ')
                 for pose in valid_poses:
-                    print frag_lib_cplx.mol2frag[pose],
-                print ""
+                    print(frag_lib_cplx.mol2frag[pose], end=' ')
+                print("")
             frag_lib_cplx.draw("cplx_")
 
-            print "Lig Fragments..."
+            print("Lig Fragments...")
             for case in range(fitter.N_case):
                 name        = fitter.name[case]
                 valid_poses = np.where(fitter.ind_case_lig==case)[0]
-                print name,
+                print(name, end=' ')
                 for pose in valid_poses:
-                    print frag_lib_lig.mol2frag[pose],
-                print ""
+                    print(frag_lib_lig.mol2frag[pose], end=' ')
+                print("")
             frag_lib_lig.draw("lig_")
 
 
@@ -488,7 +490,7 @@ def decomposition(gdatarec_lib, gdata_lib, mode, parms=6, pairs=True, parmsfile=
     ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 
     if verbose:
-        print "Calculate fragment weightings..."
+        print("Calculate fragment weightings...")
     ### Constructor for weight_fitting:
     ### def __init__(self, fitter, x, frag_library, prefix=None, verbose=False):
     weight = weight_fitting(fitter, best_x_A, pairs, frag_lib, "pos", verbose)

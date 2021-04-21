@@ -139,7 +139,7 @@ _corrected_aff(PyObject *self, PyObject *args){
     }
 
     if (verbose){
-        printf("Done and return.\n");
+        printf("Done.\n");
     }
 
     return PyArray_Return(corrected_aff);
@@ -298,7 +298,7 @@ _sasa_softgrid_ext(PyObject *self, PyObject *args){
     }
 
     if (verbose){
-        printf("Done and return.\n");
+        printf("Done.\n");
     }
     
     free(atomradius);
@@ -434,7 +434,7 @@ _sasa_grid_ext(PyObject *self, PyObject *args) {
     }
 
     if (verbose){
-        printf("Done and return.\n");
+        printf("Done.\n");
     }
     
     free(atomradius);
@@ -533,7 +533,7 @@ _sasa_vol_ext(PyObject *self, PyObject *args) {
     }
 
     if (verbose){
-        printf("Done and return.\n");
+        printf("Done.\n");
     }
     
     free(valid_voxel);

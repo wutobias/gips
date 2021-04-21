@@ -20,39 +20,38 @@ from gips.datastrc.gdat_fit_lib import gdat_fit_lib
 import copy
 
 def gistmodel(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False, decomp_E=False,
-            decomp_S=False, optimizer='evolution', niter=500, nmin=1000, popsize=50, 
+            decomp_S=False, optimizer='evolution', niter=500, popsize=50, 
             stepsize=0.05, verbose=False, kforce=100., gradient=False, boundary=False, 
             radiusadd=[0.,3.], boundsfile=None, softness=1., softcut=2., pairfile=None, 
             exclude=None, paircut=0.0, shuffle=False, ksplit=5, ksplitfile=None, prefix=None,
             scaling=2.0, parmsfile=None):
 
     if verbose:
-        print "Start optimization with"
-        print "mode      = %d"    %mode
-        print "optimizer = %s"    %optimizer
-        print "niter     = %d"    %niter
-        print "nmin      = %d"    %nmin
+        print("Start optimization with")
+        print("mode      = %d"    %mode)
+        print("optimizer = %s"    %optimizer)
+        print("niter     = %d"    %niter)
         if optimizer=="evolution":
-            print "popsize   = %d" %popsize
-        print "kforce    = %6.3f" %kforce
-        print "gradient  = %s"    %gradient
-        print "boundary  = %s"    %boundary
-        print "pairs     = %s"    %pairs
-        print "decomp_E  = %s"    %decomp_E
-        print "decomp_S  = %s"    %decomp_S
+            print("popsize   = %d" %popsize)
+        print("kforce    = %6.3f" %kforce)
+        print("gradient  = %s"    %gradient)
+        print("boundary  = %s"    %boundary)
+        print("pairs     = %s"    %pairs)
+        print("decomp_E  = %s"    %decomp_E)
+        print("decomp_S  = %s"    %decomp_S)
         if pairs:
-            print "pairfile  = %s"    %pairfile
-            print "paircut   = %6.3f" %paircut
-        print "softness  = %6.3f" %softness
-        print "softcut   = %6.3f" %softcut
-        print "shuffle   = %s"    %shuffle
-        print "ksplit    = %d"    %ksplit
+            print("pairfile  = %s"    %pairfile)
+            print("paircut   = %6.3f" %paircut)
+        print("softness  = %6.3f" %softness)
+        print("softcut   = %6.3f" %softcut)
+        print("shuffle   = %s"    %shuffle)
+        print("ksplit    = %d"    %ksplit)
         if ksplitfile != None \
         and ksplitfile != "":
-            print "Splitfile %s" %ksplitfile
+            print("Splitfile %s" %ksplitfile)
         if exclude != None \
         and exclude != "":
-            print "Exclude file %s" %exclude
+            print("Exclude file %s" %exclude)
 
     optparms = OrderedDict()
     optparms["Niter               "] = niter
@@ -62,7 +61,7 @@ def gistmodel(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False, decomp_E=Fals
     elif optimizer=="brute":
         optparms["Stepsize            "] = stepsize
     else:
-        optparms["Nmin                "] = nmin
+        optparms["Niter               "] = niter
     optparms["k_rstr              "] = kforce
     optparms["Radius add          "] = radiusadd
     optparms["Softness            "] = softness
@@ -93,7 +92,7 @@ def gistmodel(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False, decomp_E=Fals
         optparms["Exclude file        "] = exclude
 
     if verbose:
-        print "Organizing and preparing data ..."
+        print("Organizing and preparing data ...")
 
     mode_dict = dict()
     mode_dict = {0 : mode0,
@@ -104,7 +103,7 @@ def gistmodel(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False, decomp_E=Fals
                  6 : mode6,
                  7 : mode7 }
 
-    if mode in mode_dict.keys():
+    if mode in list(mode_dict.keys()):
         fitmode = mode_dict[mode]
     else:
         mode_error(mode)
@@ -125,7 +124,7 @@ def gistmodel(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False, decomp_E=Fals
         ### the metadata (this should be fast).
 
         if verbose:
-            print "Preloading the gdat lib ..."
+            print("Preloading the gdat lib ...")
         fit_lib = gdat_fit_lib(gdatarec_dict=gdatarec_lib,
                             gdata_dict=gdata_lib,
                             ref_energy=-11.108,
@@ -234,7 +233,7 @@ def gistmodel(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False, decomp_E=Fals
             k_groups = generate_ksplits(ksplit, fitter.N_pairs)
         else:
             k_groups = generate_ksplits(ksplit, fitter.N_case)
-        ksplitlist = range(ksplit)
+        ksplitlist = list(range(ksplit))
 
     else:
         ksplitlist = [ksplit]
@@ -268,7 +267,7 @@ def gistmodel(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False, decomp_E=Fals
                                     optparms=optparms, selection_A=train_group, selection_B=test_group, 
                                     prefix="k%d."%i + prefix, verbose=verbose)
 
-            for key, value in parmdict.items():
+            for key, value in list(parmdict.items()):
                 if key=="header":
                     continue
                 x = np.array(value[:fitter._parms])
@@ -278,14 +277,13 @@ def gistmodel(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False, decomp_E=Fals
 
         else:
             if verbose:
-                print "Start optimization for ksplit=%d ..." %i
+                print("Start optimization for ksplit=%d ..." %i)
 
             _print_fun = print_fun(fitter=fitter, mode=mode, optimizer=optimizer, 
                                     optparms=optparms, selection_A=train_group, selection_B=test_group, 
                                     prefix="k%d."%i + prefix, verbose=verbose)
 
             fitter.optimize(niter=niter,
-                            nmin=nmin,
                             kforce=kforce,
                             gradient=gradient,
                             print_fun=_print_fun,
@@ -294,6 +292,6 @@ def gistmodel(gdatarec_lib, gdata_lib, mode, parms=6, pairs=False, decomp_E=Fals
                             optimizer=optimizer)
 
         if verbose:
-            print "Generating output ..."
+            print("Generating output ...")
 
         _print_fun.finish()

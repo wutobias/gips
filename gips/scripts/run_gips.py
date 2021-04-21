@@ -1,4 +1,4 @@
-import cPickle as pickle
+import pickle as pickle
 import gzip
 from gips.scripts.parse_args import parse_args
 from gips.scripts import run_buildlib
@@ -18,11 +18,11 @@ def main():
 
     if args.mode == "buildlib":
         if args.verbose:
-            print "Attempting to build library ..."
+            print("Attempting to build library ...")
         gistlib = run_buildlib.buildlib(args.gdat, args.verbose, args.cut)
         if args.savelib != None:
             if args.verbose:
-                print "Saving library file ..."
+                print("Saving library file ...")
             if not args.savelib.endswith(".gz"):
                 args.savelib = args.savelib+".gz"
             output = gzip.open(args.savelib, "wb")
@@ -37,11 +37,11 @@ def main():
     elif args.mode == "gistfit":
         if args.gdat != None:
             if args.verbose:
-                print "Loading gdata from %s ..." %args.gdat
+                print("Loading gdata from %s ..." %args.gdat)
             gdatarec_dict, gdata_dict = run_buildlib.buildlib(args.gdat, args.verbose, args.cut)
         elif args.loadlib != None:
             if args.verbose:
-                print "Loading gdata from %s ..." %args.loadlib
+                print("Loading gdata from %s ..." %args.loadlib)
             if args.loadlib.endswith(".gz"):
                 fopen = gzip.open(args.loadlib, "rb")
             else:
@@ -52,11 +52,11 @@ def main():
             raise IOError("Must provide gistdata by specifing either --loadlib or --gdat")
 
         if args.verbose:
-            print "Attempting to build a gist model ..."
+            print("Attempting to build a gist model ...")
 
         run_gistmodel.gistmodel(gdatarec_dict, gdata_dict, mode=args.fitmode, parms=args.score, pairs=args.pairs,
                                 decomp_E=args.decomp_E, decomp_S=args.decomp_S, optimizer=args.optimizer, niter=args.niter, 
-                                nmin=args.nmin, popsize=args.popsize, stepsize=args.stepsize, verbose=args.verbose, 
+                                popsize=args.popsize, stepsize=args.stepsize, verbose=args.verbose, 
                                 kforce=args.kforce, gradient=args.gradient, boundary=args.boundary, radiusadd=args.radiusadd, 
                                 boundsfile=args.boundsfile, softness=args.softness, softcut=args.softcut, pairfile=args.pairfile, 
                                 exclude=args.exclude, paircut=args.paircut, shuffle=args.shuffle, ksplit=args.ksplit, 
@@ -84,11 +84,11 @@ def main():
 
         if args.gdat != None:
             if args.verbose:
-                print "Loading gdata from %s ..." %args.gdat
+                print("Loading gdata from %s ..." %args.gdat)
             gdatarec_dict, gdata_dict = run_buildlib.buildlib(args.gdat, args.verbose, args.cut)
         elif args.loadlib != None:
             if args.verbose:
-                print "Loading gdata from %s ..." %args.loadlib
+                print("Loading gdata from %s ..." %args.loadlib)
             if args.loadlib.endswith(".gz"):
                 fopen = gzip.open(args.loadlib, "rb")
             else:
@@ -99,7 +99,7 @@ def main():
             raise IOError("Must provide gistdata by specifing either --loadlib or --gdat")
 
         if args.verbose:
-            print "Attempting to mapout the gistmodel ..."
+            print("Attempting to mapout the gistmodel ...")
 
         run_mapout.mapout(gdatarec_dict, gdata_dict, mode=args.fitmode, parms=args.score, pairs=args.pairs, 
                             parmsfile=args.parmsfile, radiusadd=args.radiusadd, softness=args.softness, softcut=args.softcut, 
@@ -117,11 +117,11 @@ def main():
 
         if args.gdat != None:
             if args.verbose:
-                print "Loading gdata from %s ..." %args.gdat
+                print("Loading gdata from %s ..." %args.gdat)
             gdatarec_dict, gdata_dict = run_buildlib.buildlib(args.gdat, args.verbose, args.cut)
         elif args.loadlib != None:
             if args.verbose:
-                print "Loading gdata from %s ..." %args.loadlib
+                print("Loading gdata from %s ..." %args.loadlib)
             if args.loadlib.endswith(".gz"):
                 fopen = gzip.open(args.loadlib, "rb")
             else:
@@ -132,7 +132,7 @@ def main():
             raise IOError("Must provide gistdata by specifing either --loadlib or --gdat")
 
         if args.verbose:
-            print "Attempting to mapout the gistmodel ..."
+            print("Attempting to mapout the gistmodel ...")
 
         run_decomposition.decomposition(gdatarec_dict, gdata_dict, mode=args.fitmode, parms=args.score, pairs=args.pairs,
                                         parmsfile=args.parmsfile, frag_file=args.frag_file, map_file=args.map_file, radiusadd=args.radiusadd, 
