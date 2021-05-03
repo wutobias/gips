@@ -2,11 +2,11 @@ from gips.utils.misc import generate_ksplits
 
 def split(pairfile=None, inclfile=None, exclfile=None, K=5, cut=0.75, prefix=""):
 
-    if type(pairfile)!=str and type(inclfile)!=str:
-        raise IOError("Must provide pairfile or include file or both.")
+    if pairfile == None and inclfile == None:
+        raise ValueError("Must provide pairfile or include file or both.")
 
     if pairfile=="" and inclfile=="":
-        raise IOError("Must provide pairfile or include file or both.")
+        raise ValueError("Must provide pairfile or include file or both.")
 
     if K<=0:
         raise ValueError("K must be >0.")
@@ -15,8 +15,7 @@ def split(pairfile=None, inclfile=None, exclfile=None, K=5, cut=0.75, prefix="")
         raise ValueError("cut must be >0.")
 
     exclude_mols=list()
-    if exclfile!="" and \
-    type(exclfile)!=None:
+    if exclfile != "" and exclfile != None:
         with open(exclfile, "r") as fopen:
             for line in fopen:
                 l = line.lstrip().rstrip().split()
@@ -28,8 +27,7 @@ def split(pairfile=None, inclfile=None, exclfile=None, K=5, cut=0.75, prefix="")
                     exclude_mols.append(s)
 
     include_mols=list()
-    if inclfile!="" and \
-    type(inclfile)!=None:
+    if inclfile != "" and inclfile != None:
         with open(inclfile, "r") as fopen:
             for line in fopen:
                 l = line.lstrip().rstrip().split()
@@ -53,8 +51,7 @@ def split(pairfile=None, inclfile=None, exclfile=None, K=5, cut=0.75, prefix="")
 
     pair_list = list()
     pair_vals = list()
-    if pairfile!="" and \
-    type(pairfile)!=None:
+    if pairfile != "" and pairfile != None:
         with open(pairfile, "r") as fopen:
             for line in fopen:
                 l = line.lstrip().rstrip().split()

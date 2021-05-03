@@ -62,98 +62,6 @@ def parse_args():
                         Only required in mode=buildlib')
 
 
-    parser.add_argument('-c', '--cut',
-                        required=False,
-                        type=float,
-                        default=-1.,
-                        help='Cut out range for gist boxes. Negative value \
-                        means no cutting performed.')
-
-
-    parser.add_argument('-ni', '--niter',
-                        required=False,
-                        type=int,
-                        default=500,
-                        help='Number MC attempts in basinhopping optimization before termination or number of generations \
-in evolution optimization.')
-
-
-    parser.add_argument('-pop', '--popsize',
-                        required=False,
-                        type=int,
-                        default=50,
-                        help='Population size during differental evolution optimization.')
-
-
-    parser.add_argument('-step', '--stepsize',
-                        required=False,
-                        type=float,
-                        default=0.05,
-                        help='Search stepsize used for brute force optimization.')
-
-
-    parser.add_argument('-opt', '--optimizer',
-                        required=False,
-                        type=str,
-                        default='evolution',
-                        choices=['evolution', 'basinhopping', 'brute'],
-                        help='Optimizer strategy used for optmization. \
-                        For more details see PyGMO documentation.')
-
-
-    parser.add_argument('-of', '--outfreq',
-                        required=False,
-                        type=int,
-                        default=10,
-                        help='Output frequency for gistmodelout file.')
-
-
-    parser.add_argument('-r', '--radiusadd',
-                        required=False,
-                        type=float,
-                        nargs=2,
-                        default=[0.,3.],
-                        help='Constant added to atomic radii during calculation of molecular volume. \
-                        Can be used to calculate volume around molecule up to a certain shell of water. \
-                        The first value in the list will be used for the receptor, the second value will \
-                        be used for ligand and complex. It is recommended to use \'0\' for the receptor \
-                        and a value of \'3\' for the ligand and complex.')
-
-
-    parser.add_argument('-soft', '--softness',
-                        required=False,
-                        type=float,
-                        default=1.,
-                        help='Softness parameter \'s\' used for the calculation of soft molecular surface.')
-
-
-    parser.add_argument('-softcut', '--softcut',
-                        required=False,
-                        type=float,
-                        default=2.,
-                        help='Softness cutoff parameter \'c\' used for the calculation of soft molecular surface.')
-
-
-    parser.add_argument('-gr', '--gradient',
-                        action='store_true',
-                        help='Use analytical gradient. Otherwise approximate gradient using forward \
-                        finite differences.')
-
-
-    parser.add_argument('-bo', '--boundary',
-                        action='store_true',
-                        help='Use analytical boundary restraints. Otherwise treat boundaries as explicit \
-                        constraints.')
-
-
-    parser.add_argument('-k', '--kforce',
-                        required=False,
-                        type=float,
-                        default=100.,
-                        help='Force constant used for analytical treatment of boundaries. \
-                        Default is 100.')
-
-
     parser.add_argument('-f', '--fitmode',
                         required=False,
                         type=int,
@@ -195,6 +103,91 @@ are activated, only --decomp_E will be recognized.')
                         action='store_true',
                         help='Activate partial decomposition mode with only entropy. Note, that when both --decomp_E and --decomp_S \
 are activated, only --decomp_E will be recognized.')
+
+
+    parser.add_argument('-c', '--cut',
+                        required=False,
+                        type=float,
+                        default=-1.,
+                        help='Cut out range for gist boxes. Negative value \
+                        means no cutting performed.')
+
+
+    parser.add_argument('-r', '--radiusadd',
+                        required=False,
+                        type=float,
+                        nargs=2,
+                        default=[0.,3.],
+                        help='Constant added to atomic radii during calculation of molecular volume. \
+                        Can be used to calculate volume around molecule up to a certain shell of water. \
+                        The first value in the list will be used for the receptor, the second value will \
+                        be used for ligand and complex. It is recommended to use \'0\' for the receptor \
+                        and a value of \'3\' for the ligand and complex.')
+
+
+    parser.add_argument('-softness', '--softness',
+                        required=False,
+                        type=float,
+                        default=1.,
+                        help='Softness parameter \'s\' used for the calculation of soft molecular surface.')
+
+
+    parser.add_argument('-softcut', '--softcut',
+                        required=False,
+                        type=float,
+                        default=2.,
+                        help='Softness cutoff parameter \'c\' used for the calculation of soft molecular surface.')
+
+
+    parser.add_argument('-ni', '--niter',
+                        required=False,
+                        type=int,
+                        default=500,
+                        help='Number MC attempts in basinhopping optimization before termination or number of generations \
+in evolution optimization.')
+
+
+    parser.add_argument('-pop', '--popsize',
+                        required=False,
+                        type=int,
+                        default=50,
+                        help='Population size during differental evolution optimization.')
+
+
+    parser.add_argument('-step', '--stepsize',
+                        required=False,
+                        type=float,
+                        default=0.05,
+                        help='Search stepsize used for brute force optimization.')
+
+
+    parser.add_argument('-opt', '--optimizer',
+                        required=False,
+                        default='evolution',
+                        type=str,
+                        choices=['evolution', 'basinhopping', 'brute'],
+                        help='Optimizer strategy used for optmization. \
+                        For more details see PyGMO documentation.')
+
+
+    parser.add_argument('-gr', '--gradient',
+                        action='store_true',
+                        help='Use analytical gradient. Otherwise approximate gradient using forward \
+                        finite differences.')
+
+
+    parser.add_argument('-bo', '--boundary',
+                        action='store_true',
+                        help='Use analytical boundary restraints. Otherwise treat boundaries as explicit \
+                        constraints.')
+
+
+    parser.add_argument('-k', '--kforce',
+                        required=False,
+                        type=float,
+                        default=100.,
+                        help='Force constant used for analytical treatment of boundaries. \
+                        Default is 100.')
 
 
     parser.add_argument('-p', '--pairs',
